@@ -1,3 +1,4 @@
+<a name="top"></a>
 <div align="center">
 
 # 🌊 Quantum Relief
@@ -12,9 +13,12 @@ A constraint-preserving quantum optimiser (QAOA in Qiskit) that picks warehouse 
 ![Tests](https://img.shields.io/badge/tests-8%20passing-2a9d8f)
 ![Domain](https://img.shields.io/badge/Domain-Disaster%20Response-d1495b)
 
-[**Run it**](#-run-it-in-2-minutes) · [**The idea**](#-the-idea-in-30-seconds) · [**How it works**](#-how-it-works) · [**Results**](#-results) · [**Limits**](#-honest-limitations) · [**Report (.docx)**](docs/REPORT.docx) · [**Pitch**](docs/PITCH.md)
+| [🚀 Run the app](#-run-the-app) | [🧪 Run the code](#-run-the-code) | [💡 The idea](#-the-idea-in-30-seconds) | [🔧 How it works](#-how-it-works) | [📊 Results](#-results) | [🧭 Limits](#-honest-limitations) |
+|:-:|:-:|:-:|:-:|:-:|:-:|
 
-<img src="docs/app.png" width="820" alt="The planner app: recommended sites, impact numbers and plan comparison">
+📄 [Report (.docx)](docs/REPORT.docx) · 🎤 [3-minute pitch](docs/PITCH.md) · 📓 [Notebook walkthrough](notebooks/demo.ipynb)
+
+<img src="docs/app.png" width="820" alt="The planner app: guide, recommended sites, impact numbers and plan comparison">
 
 </div>
 
@@ -35,54 +39,128 @@ Giving up 7% of typical-year reach protects **51% more people in a bad year**. T
 
 > "Bad flood year" = the 1-in-20 worst season across 20,000 simulated seasons the optimiser never saw. All demo data is synthetic.
 
-## 🚀 Run it in 2 minutes
+<p align="right"><a href="#top">⬆ back to top</a></p>
+
+## 🚀 Run the app
+
+> [!TIP]
+> **On Windows, the whole thing is one double-click:** download the project, open the folder and double-click **`run_app.bat`**. It creates the environment, installs everything and opens the app.
+
+**You need:** Python 3.12 or newer (tested on 3.13) and Git. Nothing else: no quantum hardware and no accounts.
+
+### Step 1 · Get the code
 
 ```bash
 git clone https://github.com/abdulrehman11tariq/Qiskit.git
 cd Qiskit
-python -m venv .venv
 ```
 
+### Step 2 · Install and start
+
 <details open>
-<summary><b>Windows (PowerShell)</b></summary>
+<summary><b>🪟 Windows</b></summary>
+
+Double-click `run_app.bat`, **or** run in PowerShell:
 
 ```powershell
+py -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
 .venv\Scripts\python -m streamlit run app.py
 ```
-Use `py -m venv .venv` if `python` is not recognised. Or just double-click `run_app.bat`, which does all three steps.
 </details>
 
 <details>
-<summary><b>macOS / Linux</b></summary>
+<summary><b>🍎 macOS / 🐧 Linux</b></summary>
 
 ```bash
+python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python -m streamlit run app.py
 ```
 </details>
 
-The app opens at `http://localhost:8501`. Then try:
+### Step 3 · Open it
 
-| Do this | See this |
+Your browser opens **http://localhost:8501**. The first plan takes about 10 seconds.
+
+| ✅ You should see | |
 |---|---|
-| Drag **"How cautious should the plan be?"** to the left, press the button | The plan collapses onto the biggest sites in two basins |
-| Drag it right | Stock spreads across basins; bad-year reach rises |
-| Open **Flood outlook**, raise one basin to 80% | The plan moves stock out of that basin |
-| Open the **Under the hood** tab | Qubits, gates, measured distribution, noise simulation |
+| Title | **Flood Relief Stockpile Planner** |
+| Recommendation | *Recommended: stock Nowshera, Sukkur, D.G. Khan, Multan* |
+| Green banner | *Verified: out of all 210 possible plans, this is the best one* |
+
+Stop the app with <kbd>Ctrl</kbd> + <kbd>C</kbd> in the terminal.
+
+### Step 4 · Try these three things
+
+| # | Do this in the left panel | What happens |
+|:-:|---|---|
+| 1 | Drag **How cautious should the plan be?** fully left → **Find the best plan** | Stock piles into the biggest sites, in only two river basins |
+| 2 | Drag it back to **Balanced** → **Find the best plan** | Stock spreads over four basins; bad-year reach rises from 90,000 to 136,000 |
+| 3 | Open **Flood outlook this season**, raise one basin to 80% → **Find the best plan** | Stock moves out of that basin |
+
+Then open the **⚛️ Under the hood** tab for the qubits, gate counts, measured distribution and a hardware-noise simulation.
 
 <details>
-<summary><b>Reproduce every number and figure</b></summary>
+<summary><b>🛠️ Something not working?</b></summary>
 
-```bash
-python -m pytest -q              # 8 tests, incl. Hamiltonian = cost on all 1,024 bitstrings
-python -m src.run_baseline       # exact + greedy reference table
-python -m src.run_experiments    # all figures and results/results.json (about 2 minutes)
-```
-Everything is seeded. `notebooks/demo.ipynb` walks through the same steps with outputs saved.
+| Symptom | Fix |
+|---|---|
+| `Python was not found` (Windows) | Use `py` instead of `python`. If `py` is missing too: `winget install Python.Python.3.13`, then reopen the terminal |
+| Streamlit asks for an email on first start | Press <kbd>Enter</kbd> to skip |
+| `Activate.ps1 cannot be loaded` | Not needed. The commands above call `.venv\Scripts\python` directly |
+| `Port 8501 is already in use` | Add `--server.port 8502` to the last command |
+| Browser does not open | Go to http://localhost:8501 yourself |
+| Install fails on an old Python | Check `python --version`; 3.12+ is required |
 </details>
 
-## ⚙️ How it works
+<p align="right"><a href="#top">⬆ back to top</a></p>
+
+## 🧪 Run the code
+
+Each command runs from the project folder after Step 2. On macOS/Linux use `.venv/bin/python` in place of `.venv\Scripts\python`. Everything is seeded, so you get the same numbers we report.
+
+| # | What it checks | Command | Time | You should see |
+|:-:|---|---|:-:|---|
+| 1 | The maths and the app are correct | `.venv\Scripts\python -m pytest -q` | ~15 s | `8 passed` |
+| 2 | Exact and greedy reference plans | `.venv\Scripts\python -m src.run_baseline` | ~2 s | A table of plans; greedy reaches 274.7k, exact at λ = 0.005 reaches 255.5k |
+| 3 | Every quantum experiment and figure | `.venv\Scripts\python -m src.run_experiments` | a few min | Three result blocks, then `saved figures and results.json in results/` |
+| 4 | Step-by-step walkthrough | `.venv\Scripts\python -m jupyter notebook notebooks/demo.ipynb` | — | A notebook with outputs already saved |
+
+<details>
+<summary><b>What the 8 tests cover</b></summary>
+
+- The Ising Hamiltonian equals the classical cost on **all 1,024 bitstrings**, with and without the penalty term.
+- The penalty is zero exactly on valid plans.
+- The Dicke-state circuit gives equal amplitudes on exactly-K bitstrings and zero elsewhere, for five sizes.
+- The XY mixer never changes the number of selected sites.
+- CVaR equals the mean of the best tail.
+- Brute force respects the budget and is never worse than greedy.
+- The app renders end to end and recommends a plan.
+</details>
+
+<details>
+<summary><b>Use the solver from your own Python</b></summary>
+
+```python
+from src.instance import make_instance
+from src.qaoa import run_qaoa, sample_counts
+from src.evaluate import problem, metrics, counts_to_probs
+from src.formulation import index_to_bits
+
+inst = make_instance()                                   # 10 sites, stock 4
+result = run_qaoa(inst.mu, inst.sigma, lam=0.005, k=inst.k,
+                  method="xy", p=3, objective="cvar")    # train the circuit
+probs = counts_to_probs(sample_counts(result), inst.n)   # measure 2,048 shots
+m = metrics(probs, problem(inst.mu, inst.sigma, 0.005, inst.k))
+plan = index_to_bits(m["pick"], inst.n)
+print([name for name, chosen in zip(inst.names, plan) if chosen], "rank", m["pick_rank"])
+```
+</details>
+
+<p align="right"><a href="#top">⬆ back to top</a></p>
+
+## 🔧 How it works
 
 ```mermaid
 flowchart LR
@@ -140,6 +218,8 @@ $\Sigma$ is the covariance of people reached between sites. Two sites in the sam
 | [`docs/`](docs) | Report (`REPORT.docx`, with architecture diagram), Markdown copy, 3-minute pitch script |
 </details>
 
+<p align="right"><a href="#top">⬆ back to top</a></p>
+
 ## 📊 Results
 
 Test instance: 10 sites, 4 to stock, 210 valid plans, $\lambda = 0.005$. Exact reference: brute force.
@@ -183,6 +263,8 @@ The exact optimum is the single most-measured plan, about 20 times more often th
 The p = 3 circuit compiles to 574 CX gates. Noise breaks the budget guarantee, so invalid shots must be discarded.
 </details>
 
+<p align="right"><a href="#top">⬆ back to top</a></p>
+
 ## 🧭 Honest limitations
 
 - **No quantum speed-up is shown or claimed.** With 10 sites, brute force takes milliseconds. This is a correct small-scale formulation, not evidence of advantage.
@@ -191,27 +273,6 @@ The p = 3 circuit compiles to 574 CX gates. Noise breaks the budget guarantee, s
 - **Variance is a blunt risk measure.** It penalises good surprises as much as bad ones.
 - **Shortlist caveat.** With only 210 valid plans, sampling alone would eventually hit the optimum, so we report how strongly the circuit *concentrates* probability rather than whether the optimum appears.
 - **Novelty.** We found classical mean-variance relief models but no quantum implementation of this problem in a brief literature search; that search was not exhaustive.
-
-## 🎯 Where each judging criterion is answered
-
-<details>
-<summary><b>Open the rubric map</b></summary>
-
-| Criterion | Where to look |
-|---|---|
-| A. Problem validity | [The idea](#-the-idea-in-30-seconds), formulation above, [report §1–2](docs/REPORT.md) |
-| B. Meaningful quantum utilisation | [`src/qaoa.py`](src/qaoa.py), variant table above, [report §3](docs/REPORT.md) |
-| C. Implementation and validation | `pytest`, [`src/run_experiments.py`](src/run_experiments.py), [Results](#-results) |
-| D. Innovation | Correlated-flood risk as the quadratic term; hand-built Dicke + XY ansatz with CVaR |
-| E. Presentation | The app, [pitch script](docs/PITCH.md) |
-</details>
-
-## ☁️ Put the app online (optional, free)
-
-1. Push this repository to GitHub. The repository owner (admin) must do the next steps.
-2. Sign in at [share.streamlit.io](https://share.streamlit.io) with GitHub and choose **Create app**.
-3. Select this repository, branch `main`, main file `app.py`.
-4. Under **Advanced settings** choose Python 3.13, then **Deploy**.
 
 ## 📚 References
 
