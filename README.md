@@ -19,7 +19,7 @@ A constraint-preserving quantum optimiser (QAOA in Qiskit) that picks warehouse 
 | [🚀 Run the app](#-run-the-app) | [🧪 Run the code](#-run-the-code) | [💡 The idea](#-the-idea-in-30-seconds) | [🔧 How it works](#-how-it-works) | [📊 Results](#-results) | [🧭 Limits](#-honest-limitations) |
 |:-:|:-:|:-:|:-:|:-:|:-:|
 
-📄 [Report (.docx)](docs/REPORT.docx) · 🎤 [3-minute pitch](docs/PITCH.md) · 📓 [Notebook walkthrough](notebooks/demo.ipynb)
+📄 [Report (.docx)](docs/REPORT.docx) · 📓 [Notebook walkthrough](notebooks/demo.ipynb)
 
 <img src="docs/app.png" width="820" alt="The planner app: guide, recommended sites, impact numbers and plan comparison">
 
@@ -228,7 +228,7 @@ $\Sigma$ is the covariance of people reached between sites. Two sites in the sam
 | [`src/service.py`](src/service.py), [`src/worker.py`](src/worker.py) | Solver entry points and the helper process the app runs them in |
 | [`src/run_experiments.py`](src/run_experiments.py) | Regenerates `results/` |
 | [`tests/`](tests) | Formulation checks and an end-to-end app test |
-| [`docs/`](docs) | Report (`REPORT.docx`, with architecture diagram), Markdown copy, 3-minute pitch script |
+| [`docs/`](docs) | Report (`REPORT.docx`, with architecture diagram) and a Markdown copy |
 </details>
 
 <p align="right"><a href="#top">⬆ back to top</a></p>
