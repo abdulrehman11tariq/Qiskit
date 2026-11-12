@@ -1,0 +1,318 @@
+{
+  "instance": {
+    "sites": [
+      "Nowshera",
+      "Charsadda",
+      "Sukkur",
+      "Larkana",
+      "Dadu",
+      "Rajanpur",
+      "D.G. Khan",
+      "Muzaffargarh",
+      "Jhang",
+      "Multan"
+    ],
+    "k": 4,
+    "lam": 0.005
+  },
+  "methods": [
+    {
+      "method": "Standard QAOA (penalty)",
+      "p": 1,
+      "feasible_rate": 0.498839399683407,
+      "approx_ratio": 0.6223359733513906,
+      "p_optimum": 0.0024304342664314936,
+      "amplification": 0.5103911959506137,
+      "pick_rank": 1
+    },
+    {
+      "method": "Standard QAOA (penalty)",
+      "p": 2,
+      "feasible_rate": 0.6482817133803395,
+      "approx_ratio": 0.6236764660657601,
+      "p_optimum": 0.0032045075894112187,
+      "amplification": 0.6729465937763559,
+      "pick_rank": 1
+    },
+    {
+      "method": "Standard QAOA (penalty)",
+      "p": 3,
+      "feasible_rate": 0.8763530842777809,
+      "approx_ratio": 0.6259669658585167,
+      "p_optimum": 0.0044402217438890374,
+      "amplification": 0.9324465662166977,
+      "pick_rank": 1
+    },
+    {
+      "method": "Dicke + XY mixer",
+      "p": 1,
+      "feasible_rate": 1.0000000000000002,
+      "approx_ratio": 0.7377098368375062,
+      "p_optimum": 0.025600467727126767,
+      "amplification": 5.376098222696621,
+      "pick_rank": 1
+    },
+    {
+      "method": "Dicke + XY mixer",
+      "p": 2,
+      "feasible_rate": 1.0000000000000013,
+      "approx_ratio": 0.7946863216981285,
+      "p_optimum": 0.047005452938374465,
+      "amplification": 9.871145117058637,
+      "pick_rank": 1
+    },
+    {
+      "method": "Dicke + XY mixer",
+      "p": 3,
+      "feasible_rate": 1.0000000000000004,
+      "approx_ratio": 0.832031514481755,
+      "p_optimum": 0.049390091086968735,
+      "amplification": 10.371919128263434,
+      "pick_rank": 1
+    },
+    {
+      "method": "Dicke + XY mixer + CVaR",
+      "p": 1,
+      "feasible_rate": 1.0000000000000002,
+      "approx_ratio": 0.7437531428057979,
+      "p_optimum": 0.031277823435460386,
+      "amplification": 6.56834292144668,
+      "pick_rank": 1
+    },
+    {
+      "method": "Dicke + XY mixer + CVaR",
+      "p": 2,
+      "feasible_rate": 0.9999999999999984,
+      "approx_ratio": 0.7957509305129027,
+      "p_optimum": 0.06123310603829312,
+      "amplification": 12.858952268041554,
+      "pick_rank": 1
+    },
+    {
+      "method": "Dicke + XY mixer + CVaR",
+      "p": 3,
+      "feasible_rate": 0.9999999999999993,
+      "approx_ratio": 0.7983341963354287,
+      "p_optimum": 0.1002615552257972,
+      "amplification": 21.05492659741741,
+      "pick_rank": 1
+    }
+  ],
+  "frontier": [
+    {
+      "plan": "greedy top-k",
+      "lam": null,
+      "sites": [
+        "Nowshera",
+        "Charsadda",
+        "Sukkur",
+        "Larkana"
+      ],
+      "expected": 274.74899999999997,
+      "std": 108.62437399733614,
+      "bad_season": 90.0
+    },
+    {
+      "plan": "exact",
+      "lam": 0,
+      "sites": [
+        "Nowshera",
+        "Charsadda",
+        "Sukkur",
+        "Larkana"
+      ],
+      "expected": 274.74899999999997,
+      "std": 108.62437399733614,
+      "bad_season": 90.0
+    },
+    {
+      "plan": "quantum",
+      "lam": 0,
+      "sites": [
+        "Nowshera",
+        "Charsadda",
+        "Sukkur",
+        "Larkana"
+      ],
+      "expected": 274.74899999999997,
+      "std": 108.62437399733614,
+      "bad_season": 90.0,
+      "rank": 1,
+      "p_optimum": 0.032091465314182416
+    },
+    {
+      "plan": "exact",
+      "lam": 0.002,
+      "sites": [
+        "Nowshera",
+        "Charsadda",
+        "Sukkur",
+        "D.G. Khan"
+      ],
+      "expected": 268.993,
+      "std": 93.1966563744628,
+      "bad_season": 76.0
+    },
+    {
+      "plan": "quantum",
+      "lam": 0.002,
+      "sites": [
+        "Nowshera",
+        "Charsadda",
+        "Sukkur",
+        "D.G. Khan"
+      ],
+      "expected": 268.993,
+      "std": 93.1966563744628,
+      "bad_season": 76.0,
+      "rank": 1,
+      "p_optimum": 0.08413163642777004
+    },
+    {
+      "plan": "exact",
+      "lam": 0.005,
+      "sites": [
+        "Nowshera",
+        "Sukkur",
+        "D.G. Khan",
+        "Multan"
+      ],
+      "expected": 255.50799999999998,
+      "std": 72.28528562064783,
+      "bad_season": 136.0
+    },
+    {
+      "plan": "quantum",
+      "lam": 0.005,
+      "sites": [
+        "Nowshera",
+        "Sukkur",
+        "D.G. Khan",
+        "Multan"
+      ],
+      "expected": 255.50799999999998,
+      "std": 72.28528562064783,
+      "bad_season": 136.0,
+      "rank": 1,
+      "p_optimum": 0.1002615552257972
+    },
+    {
+      "plan": "exact",
+      "lam": 0.01,
+      "sites": [
+        "Nowshera",
+        "Sukkur",
+        "D.G. Khan",
+        "Multan"
+      ],
+      "expected": 255.50799999999998,
+      "std": 72.28528562064783,
+      "bad_season": 136.0
+    },
+    {
+      "plan": "quantum",
+      "lam": 0.01,
+      "sites": [
+        "Nowshera",
+        "Sukkur",
+        "D.G. Khan",
+        "Multan"
+      ],
+      "expected": 255.50799999999998,
+      "std": 72.28528562064783,
+      "bad_season": 136.0,
+      "rank": 1,
+      "p_optimum": 0.10001789049536315
+    },
+    {
+      "plan": "exact",
+      "lam": 0.02,
+      "sites": [
+        "Charsadda",
+        "D.G. Khan",
+        "Jhang",
+        "Multan"
+      ],
+      "expected": 234.09,
+      "std": 61.74543018778419,
+      "bad_season": 126.0
+    },
+    {
+      "plan": "quantum",
+      "lam": 0.02,
+      "sites": [
+        "Charsadda",
+        "D.G. Khan",
+        "Jhang",
+        "Multan"
+      ],
+      "expected": 234.09,
+      "std": 61.74543018778419,
+      "bad_season": 126.0,
+      "rank": 1,
+      "p_optimum": 0.08233953385858306
+    },
+    {
+      "plan": "exact",
+      "lam": 0.05,
+      "sites": [
+        "Charsadda",
+        "D.G. Khan",
+        "Jhang",
+        "Multan"
+      ],
+      "expected": 234.09,
+      "std": 61.74543018778419,
+      "bad_season": 126.0
+    },
+    {
+      "plan": "quantum",
+      "lam": 0.05,
+      "sites": [
+        "Charsadda",
+        "D.G. Khan",
+        "Jhang",
+        "Multan"
+      ],
+      "expected": 234.09,
+      "std": 61.74543018778419,
+      "bad_season": 126.0,
+      "rank": 1,
+      "p_optimum": 0.17411206654736025
+    }
+  ],
+  "noise": [
+    {
+      "cx_error": 0.0,
+      "feasible_rate": 1.0,
+      "p_optimum": 0.0947265625,
+      "pick_rank": 1,
+      "cx_gates": null,
+      "depth": null
+    },
+    {
+      "cx_error": 0.001,
+      "feasible_rate": 0.69873046875,
+      "p_optimum": 0.06494140625,
+      "pick_rank": 1,
+      "cx_gates": 574,
+      "depth": 826
+    },
+    {
+      "cx_error": 0.003,
+      "feasible_rate": 0.40478515625,
+      "p_optimum": 0.02490234375,
+      "pick_rank": 1,
+      "cx_gates": 574,
+      "depth": 826
+    },
+    {
+      "cx_error": 0.01,
+      "feasible_rate": 0.25048828125,
+      "p_optimum": 0.00439453125,
+      "pick_rank": 1,
+      "cx_gates": 574,
+      "depth": 826
+    }
+  ]
+}
