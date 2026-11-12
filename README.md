@@ -38,8 +38,8 @@ Giving up 7% of typical-year reach protects **51% more people in a bad year**. T
 ## 🚀 Run it in 2 minutes
 
 ```bash
-git clone <this-repo-url>
-cd <repo-folder>
+git clone https://github.com/abdulrehman11tariq/Qiskit.git
+cd Qiskit
 python -m venv .venv
 ```
 
@@ -50,7 +50,7 @@ python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
 .venv\Scripts\python -m streamlit run app.py
 ```
-Use `py -m venv .venv` if `python` is not recognised.
+Use `py -m venv .venv` if `python` is not recognised. Or just double-click `run_app.bat`, which does all three steps.
 </details>
 
 <details>
