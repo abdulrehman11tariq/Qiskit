@@ -11,7 +11,10 @@ A constraint-preserving quantum optimiser (QAOA in Qiskit) that picks warehouse 
 ![Qiskit](https://img.shields.io/badge/Qiskit-2.6-6929C4?logo=qiskit&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/App-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 ![Tests](https://img.shields.io/badge/tests-8%20passing-2a9d8f)
+[![Live app](https://img.shields.io/badge/Live%20app-open-FF4B4B?logo=streamlit&logoColor=white)](https://hackathon-project1.streamlit.app/)
 ![Domain](https://img.shields.io/badge/Domain-Disaster%20Response-d1495b)
+
+### 🌐 [Open the live app — no install needed](https://hackathon-project1.streamlit.app/)
 
 | [🚀 Run the app](#-run-the-app) | [🧪 Run the code](#-run-the-code) | [💡 The idea](#-the-idea-in-30-seconds) | [🔧 How it works](#-how-it-works) | [📊 Results](#-results) | [🧭 Limits](#-honest-limitations) |
 |:-:|:-:|:-:|:-:|:-:|:-:|
@@ -43,45 +46,15 @@ Giving up 7% of typical-year reach protects **51% more people in a bad year**. T
 
 ## 🚀 Run the app
 
-> [!TIP]
-> **On Windows, the whole thing is one double-click:** download the project, open the folder and double-click **`run_app.bat`**. It creates the environment, installs everything and opens the app.
+### Step 1 · Open the live app
 
-**You need:** Python 3.12 or newer (tested on 3.13) and Git. Nothing else: no quantum hardware and no accounts.
+<div align="center">
 
-### Step 1 · Get the code
+## 👉 [hackathon-project1.streamlit.app](https://hackathon-project1.streamlit.app/)
 
-```bash
-git clone https://github.com/abdulrehman11tariq/Qiskit.git
-cd Qiskit
-```
+</div>
 
-### Step 2 · Install and start
-
-<details open>
-<summary><b>🪟 Windows</b></summary>
-
-Double-click `run_app.bat`, **or** run in PowerShell:
-
-```powershell
-py -m venv .venv
-.venv\Scripts\python -m pip install -r requirements.txt
-.venv\Scripts\python -m streamlit run app.py
-```
-</details>
-
-<details>
-<summary><b>🍎 macOS / 🐧 Linux</b></summary>
-
-```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python -m streamlit run app.py
-```
-</details>
-
-### Step 3 · Open it
-
-Your browser opens **http://localhost:8501**. The first plan takes about 10 seconds.
+Nothing to install. It runs in any browser, including on a phone. If you see a "waking up" screen, wait about a minute. The first plan takes about 10 seconds.
 
 | ✅ You should see | |
 |---|---|
@@ -89,9 +62,8 @@ Your browser opens **http://localhost:8501**. The first plan takes about 10 seco
 | Recommendation | *Recommended: stock Nowshera, Sukkur, D.G. Khan, Multan* |
 | Green banner | *Verified: out of all 210 possible plans, this is the best one* |
 
-Stop the app with <kbd>Ctrl</kbd> + <kbd>C</kbd> in the terminal.
 
-### Step 4 · Try these three things
+### Step 2 · Try these three things
 
 | # | Do this in the left panel | What happens |
 |:-:|---|---|
@@ -102,7 +74,47 @@ Stop the app with <kbd>Ctrl</kbd> + <kbd>C</kbd> in the terminal.
 Then open the **⚛️ Under the hood** tab for the qubits, gate counts, measured distribution and a hardware-noise simulation.
 
 <details>
-<summary><b>🛠️ Something not working?</b></summary>
+<summary><b>💻 Prefer to run it on your own computer?</b></summary>
+
+> **On Windows it is one double-click:** download the project, open the folder and double-click **`run_app.bat`**. It creates the environment, installs everything and opens the app.
+
+**You need:** Python 3.12 or newer (tested on 3.13) and Git. Nothing else: no quantum hardware and no accounts.
+
+**1 · Get the code**
+
+```bash
+git clone https://github.com/abdulrehman11tariq/Qiskit.git
+cd Qiskit
+```
+
+**2 · Install and start**
+
+🪟 **Windows**
+
+Double-click `run_app.bat`, **or** run in PowerShell:
+
+```powershell
+py -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python -m streamlit run app.py
+```
+
+🍎 **macOS** / 🐧 **Linux**
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m streamlit run app.py
+```
+
+**3 · Open it**
+
+The app opens in your browser automatically, on your own machine. The first plan takes about 10 seconds.
+
+Stop the app with <kbd>Ctrl</kbd> + <kbd>C</kbd> in the terminal.
+
+
+**Something not working?**
 
 | Symptom | Fix |
 |---|---|
@@ -110,15 +122,16 @@ Then open the **⚛️ Under the hood** tab for the qubits, gate counts, measure
 | Streamlit asks for an email on first start | Press <kbd>Enter</kbd> to skip |
 | `Activate.ps1 cannot be loaded` | Not needed. The commands above call `.venv\Scripts\python` directly |
 | `Port 8501 is already in use` | Add `--server.port 8502` to the last command |
-| Browser does not open | Go to http://localhost:8501 yourself |
+| Browser does not open | Copy the `Local URL` printed in the terminal into your browser |
 | Install fails on an old Python | Check `python --version`; 3.12+ is required |
+
 </details>
 
 <p align="right"><a href="#top">⬆ back to top</a></p>
 
 ## 🧪 Run the code
 
-Each command runs from the project folder after Step 2. On macOS/Linux use `.venv/bin/python` in place of `.venv\Scripts\python`. Everything is seeded, so you get the same numbers we report.
+These run on your own computer: first do the install under **Prefer to run it on your own computer?** above, then run each command from the project folder. On macOS/Linux use `.venv/bin/python` in place of `.venv\Scripts\python`. Everything is seeded, so you get the same numbers we report.
 
 | # | What it checks | Command | Time | You should see |
 |:-:|---|---|:-:|---|

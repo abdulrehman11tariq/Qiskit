@@ -15,8 +15,8 @@ import streamlit as st
 from src.instance import make_instance, simulate_served, BASIN_FLOOD_PROB
 from src.formulation import index_to_bits
 from src.baseline import greedy_top_k, describe
-from src.qaoa import run_qaoa, sample_counts, noisy_counts
-from src.evaluate import problem, metrics, counts_to_probs, rank_of
+from src.worker import Worker
+from src.evaluate import problem, metrics, rank_of
 
 st.set_page_config(page_title="Flood Relief Stockpile Planner", page_icon="🌊", layout="wide")
 
@@ -48,26 +48,23 @@ def get_fresh_seasons(flood_items):
     return simulate_served(20000, np.random.default_rng(999), dict(flood_items))[4]
 
 
-@st.cache_resource(show_spinner=False, max_entries=64)
-def solve(k, lam, flood_items, depth):
-    """Train the constraint-preserving QAOA and measure it 2048 times.
+@st.cache_resource(show_spinner=False)
+def get_worker():
+    """One long-lived helper process that does all the quantum simulation
+    (see src/worker.py for why)."""
+    return Worker()
 
-    cache_resource (not cache_data) on purpose: the result holds a Qiskit
-    circuit, which must be kept as a live object rather than pickled."""
-    inst = get_instance(k, flood_items)
-    res = run_qaoa(inst.mu, inst.sigma, lam, k, method="xy", p=depth, objective="cvar")
-    probs = counts_to_probs(sample_counts(res), inst.n)
-    stats = {"qubits": res.circuit.num_qubits, "gates": res.circuit.size(),
-             "depth": res.circuit.depth(), "evaluations": res.evaluations}
-    return res, probs, stats
+
+@st.cache_data(show_spinner=False)
+def solve(k, lam, flood_items, depth):
+    """Train the constraint-preserving QAOA and measure it 2048 times."""
+    return get_worker().call("plan", k, lam, flood_items, depth)
 
 
 @st.cache_data(show_spinner=False)
 def solve_noisy(k, lam, flood_items, depth, error):
     """Re-measure the same trained circuit on a noisy simulated device."""
-    res, _, _ = solve(k, lam, flood_items, depth)
-    counts, cx, _ = noisy_counts(res, error)
-    return counts_to_probs(counts, res.circuit.num_qubits), cx
+    return get_worker().call("noisy_plan", k, lam, flood_items, depth, error)
 
 
 def people(thousands):
@@ -106,6 +103,8 @@ with st.sidebar:
         with st.expander("Quantum solver effort"):
             effort = st.radio("More layers = better answer, longer wait",
                               list(EFFORT), index=2, label_visibility="collapsed")
+        # sliders take effect only on submit, because each solve takes ~10 seconds
+        st.caption("Settings apply when you press the button (about 10 seconds).")
         st.form_submit_button("Find the best plan", type="primary", width="stretch")
     st.caption("Demo data is synthetic. See the *About* tab.")
 
@@ -118,7 +117,7 @@ flood_items = tuple(sorted(flood.items()))            # hashable key for the cac
 inst = get_instance(k, flood_items)
 fresh = get_fresh_seasons(flood_items)
 with st.spinner("Running the quantum optimiser (about 10 seconds the first time)..."):
-    res, probs, stats = solve(k, lam, flood_items, depth)
+    probs, stats = solve(k, lam, flood_items, depth)
 
 prob = problem(inst.mu, inst.sigma, lam, k)           # exact reference
 m = metrics(probs, prob)                               # quantum quality numbers
@@ -135,6 +134,16 @@ st.title("🌊 Flood Relief Stockpile Planner")
 st.write("Decide **where to pre-position relief supplies before the monsoon**, so that "
          "a single flood cannot cut off most of your stock. The plan is found by a "
          "quantum optimisation algorithm and checked against every possible plan.")
+
+# first-time visitors: say what to try, so the trade-off is seen in three clicks
+with st.expander("👋 New here? Try these three things", expanded=True):
+    st.markdown(
+        "1. Move **How cautious should the plan be?** fully left and press **Find the best "
+        "plan**: stock piles into the biggest sites in just two river basins.\n"
+        "2. Move it back to **Balanced** and press again: stock spreads out and far more "
+        "people are reached in a bad flood year.\n"
+        "3. Open **Flood outlook this season**, raise one basin to 80% and press again: "
+        "stock moves out of that basin.")
 
 st.subheader("Recommended: stock " + ", ".join(quantum["sites"]))
 same_as_naive = quantum["sites"] == naive["sites"]
@@ -157,6 +166,13 @@ if m["pick_rank"] == 1:
 else:
     st.warning(f"The quantum pick ranks #{m['pick_rank']} of {n_plans} possible plans "
                f"(within {m['pick_gap']:.1%} of the best). Try the *Thorough* solver effort.")
+
+# surface the quantum result on the first screen, not only inside its tab
+st.markdown(
+    f"⚛️ **Found by a quantum algorithm (QAOA, Qiskit):** {stats['qubits']} qubits, one per "
+    f"site · **{m['feasible_rate']:.0%}** of measurements respect the budget · the best plan "
+    f"was measured **{m['amplification']:.0f}× more often** than a random guess. "
+    f"Details in the **Under the hood** tab.")
 
 tab_plan, tab_compare, tab_quantum, tab_about = st.tabs(
     ["📍 The plan", "⚖️ Compare options", "⚛️ Under the hood", "ℹ️ About"])
