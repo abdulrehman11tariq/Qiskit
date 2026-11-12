@@ -12,7 +12,7 @@ A constraint-preserving quantum optimiser (QAOA in Qiskit) that picks warehouse 
 ![Tests](https://img.shields.io/badge/tests-8%20passing-2a9d8f)
 ![Domain](https://img.shields.io/badge/Domain-Disaster%20Response-d1495b)
 
-[**Run it**](#-run-it-in-2-minutes) · [**The idea**](#-the-idea-in-30-seconds) · [**How it works**](#-how-it-works) · [**Results**](#-results) · [**Limits**](#-honest-limitations) · [**Report**](docs/REPORT.md) · [**Pitch**](docs/PITCH.md)
+[**Run it**](#-run-it-in-2-minutes) · [**The idea**](#-the-idea-in-30-seconds) · [**How it works**](#-how-it-works) · [**Results**](#-results) · [**Limits**](#-honest-limitations) · [**Report (.docx)**](docs/REPORT.docx) · [**Pitch**](docs/PITCH.md)
 
 <img src="docs/app.png" width="820" alt="The planner app: recommended sites, impact numbers and plan comparison">
 
@@ -134,9 +134,10 @@ $\Sigma$ is the covariance of people reached between sites. Two sites in the sam
 | [`src/baseline.py`](src/baseline.py) | Brute-force optimum and greedy plan |
 | [`src/qaoa.py`](src/qaoa.py) | Dicke state, mixers, training, ideal and noisy sampling |
 | [`src/evaluate.py`](src/evaluate.py) | Approximation ratio, P(optimum), shortlist |
+| [`src/service.py`](src/service.py), [`src/worker.py`](src/worker.py) | Solver entry points and the helper process the app runs them in |
 | [`src/run_experiments.py`](src/run_experiments.py) | Regenerates `results/` |
 | [`tests/`](tests) | Formulation checks and an end-to-end app test |
-| [`docs/`](docs) | Brief report and 3-minute pitch script |
+| [`docs/`](docs) | Report (`REPORT.docx`, with architecture diagram), Markdown copy, 3-minute pitch script |
 </details>
 
 ## 📊 Results
@@ -207,9 +208,10 @@ The p = 3 circuit compiles to 574 CX gates. Noise breaks the budget guarantee, s
 
 ## ☁️ Put the app online (optional, free)
 
-1. Push this repository to GitHub.
+1. Push this repository to GitHub. The repository owner (admin) must do the next steps.
 2. Sign in at [share.streamlit.io](https://share.streamlit.io) with GitHub and choose **Create app**.
-3. Select this repository, branch `main`, main file `app.py`, then **Deploy**.
+3. Select this repository, branch `main`, main file `app.py`.
+4. Under **Advanced settings** choose Python 3.13, then **Deploy**.
 
 ## 📚 References
 
